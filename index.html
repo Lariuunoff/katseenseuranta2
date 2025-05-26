@@ -46,14 +46,17 @@
     let recording = false;
     let gazeData = [];
 
+    // Estetään hiiritiedon käyttö
     webgazer.params.useMouse = false;
 
+    // Käynnistä WebGazer ja piilota kameranäkymä
     window.onload = () => {
       webgazer.setGazeListener((data, timestamp) => {
         if (recording && data && data.x && data.y) {
           dot.style.left = (data.x - 10) + 'px';
           dot.style.top = (data.y - 10) + 'px';
           dot.style.display = 'block';
+
           gazeData.push({
             x: data.x.toFixed(2),
             y: data.y.toFixed(2),
@@ -68,6 +71,7 @@
         .showFaceOverlay(false);
     };
 
+    // Kalibrointi
     startBtn.onclick = async () => {
       for (let i = 0; i < calDots.length; i++) {
         calDots[i].style.display = 'block';
@@ -79,6 +83,7 @@
       startBtn.disabled = true;
     };
 
+    // CSV-tallennus
     saveBtn.onclick = () => {
       if (gazeData.length === 0) {
         alert("Ei tallennettavaa katsedataa.");

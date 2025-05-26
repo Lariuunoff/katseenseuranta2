@@ -53,6 +53,7 @@
     // Käynnistä WebGazer ja piilota kameranäkymä
     window.onload = () => {
       webgazer.setGazeListener((data, timestamp) => {
+        console.log(data);  // ← lisää tämä
         if (recording && data && data.x && data.y) {
           dot.style.left = (data.x - 10) + 'px';
           dot.style.top = (data.y - 10) + 'px';
